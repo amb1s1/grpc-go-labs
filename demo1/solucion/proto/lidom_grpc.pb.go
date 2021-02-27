@@ -97,5 +97,5 @@ var ElejirEquipo_ServiceDesc = grpc.ServiceDesc{
 		},
 	},
 	Streams:  []grpc.StreamDesc{},
-	Metadata: "lidom.proto",
+	Metadata: "proto/lidom.proto",
 }

@@ -2,7 +2,7 @@ syntax = "proto3";
 
 package lidom;
 // Using .; is shortcut to point to the relative path to this proto directory.
-option go_package = "google.golang.org/labs/demo1/solucion/proto";
+option go_package = "google.golang.org/grpc-go-labs/demo1/solucion/proto";
 
 enum Equipo {
     EQUIPO_INVALIDO = 0;

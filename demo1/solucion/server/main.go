@@ -2,25 +2,61 @@ package main
 
 import (
 	"context"
-	"fmt"
+	"errors"
 	"log"
 	"net"
 
 	"google.golang.org/grpc"
-	pb "google.golang.org/labs/demo1/solucion/proto"
+	pb "google.golang.org/grpc-go-labs/demo1/solucion/proto"
 )
 
 type server struct {
 	pb.UnimplementedElejirEquipoServer
 }
 
+type equipo struct {
+	nombre pb.Equipo
+	ciudad string
+}
+
+var equipos = []equipo{
+	{
+		nombre: pb.Equipo_AGUILAS,
+		ciudad: "Santiago",
+	},
+	{
+		nombre: pb.Equipo_LICEY,
+		ciudad: "Santo Domingo",
+	},
+	{
+		nombre: pb.Equipo_ESCOGIDO,
+		ciudad: "Santo Domingo",
+	},
+	{
+		nombre: pb.Equipo_TOROS,
+		ciudad: "La Romana",
+	},
+	{
+		nombre: pb.Equipo_ESTRELLAS,
+		ciudad: "San Pedro de Macoris",
+	},
+	{
+		nombre: pb.Equipo_GIGANTERS,
+		ciudad: "San Francisco de Macoris",
+	},
+}
+
 func (s *server) GetCiudad(ctx context.Context, in *pb.CiudadRequest) (*pb.CiudadRepuesta, error) {
-	ciudad := "Santiago"
-	result := &pb.CiudadRepuesta{Ciudad: ciudad}
-	return result, nil
+	for _, e := range equipos {
+		if e.nombre == in.Equipo {
+			result := &pb.CiudadRepuesta{Ciudad: e.ciudad}
+			return result, nil
+
+		}
+	}
+	return nil, errors.New("Equipo no es valido")
 }
 func main() {
-	fmt.Println("vim-go")
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
