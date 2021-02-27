@@ -1,0 +1,25 @@
+syntax="proto3";
+
+package cli;
+
+option go_package="github.com/amb1s1/grpc-go-labs/demo1/solucion/proto";
+
+
+message File {
+    string name = 1;
+    int64 size = 2;
+}
+
+message LSResponse {
+    string dir_path = 1;
+    repeated File file = 2;
+}
+
+message LSRequest{
+    string dir_path = 1;
+}
+
+
+service CLI {
+    rpc GetLS(LSRequest) returns(LSResponse);
+}
