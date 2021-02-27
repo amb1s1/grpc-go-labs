@@ -6,8 +6,8 @@ import (
 	"log"
 	"net"
 
+	pb "github.com/grpc-go-labs/demo1/solucion/proto"
 	"google.golang.org/grpc"
-	pb "google.golang.org/grpc-go-labs/demo1/solucion/proto"
 )
 
 type server struct {
