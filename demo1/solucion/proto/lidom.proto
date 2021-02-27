@@ -1,0 +1,29 @@
+syntax = "proto3";
+
+package lidom;
+// Using .; is shortcut to point to the relative path to this proto directory.
+option go_package = "google.golang.org/labs/demo1/solucion/proto";
+
+enum Equipo {
+    EQUIPO_INVALIDO = 0;
+
+    AGUILAS = 1;
+    LICEY = 2;
+    TOROS = 3;
+    ESCOGIDO = 4;
+    ESTRELLAS = 5;
+    GIGANTERS = 6;
+}
+
+message CiudadRequest {
+    Equipo equipo = 1;
+}
+
+message CiudadRepuesta {
+    string ciudad = 1;
+}
+service ElejirEquipo {
+    rpc GetCiudad(CiudadRequest) returns (CiudadRepuesta) {
+
+    }
+}
